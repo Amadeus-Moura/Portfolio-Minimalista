@@ -1,3 +1,5 @@
+const base = import.meta.env.BASE_URL || '/';
+
 export const personalInfo = {
   name: "Amadeus Moura dos Santos",
   shortName: "Amadeus Moura",
@@ -64,7 +66,7 @@ export const projects = [
     statusBadge: "24/7 na Nuvem (OCI)",
     statusColor: "sky",
     stack: ["Python 3.11", "Google Gemini API", "Docker", "SQLite", "Oracle Cloud (OCI)", "Telegram API", "IMAP SSL"],
-    image: "/projects/akame.png",
+    image: `${base}projects/akame.png`,
     github: "https://github.com/Amadeus-Moura/Agente-My-Akame",
     confidential: false,
     summary: "Agente executivo autônomo na Oracle Cloud. Integração multimodal a áudio, roteador cognitivo de modelos (Flash Lite vs Flash 3.6), leitor seguro IMAP para newsletters e worker proativo de agenda.",
@@ -129,7 +131,7 @@ export const projects = [
     statusBadge: "Open-Source Ativo",
     statusColor: "cyan",
     stack: ["TypeScript", "Node.js", "yt-dlp", "Web Audio API", "DOM Manipulation", "Algoritmos de FFT"],
-    image: "/projects/mediaflow.png",
+    image: `${base}projects/mediaflow.png`,
     github: "https://github.com/Amadeus-Moura/MidiaFlow",
     confidential: false,
     summary: "Plataforma open-source que une engenharia de software e contrabaixo elétrico. Extrai mídias com yt-dlp e gera tablaturas interativas sincronizadas casa a casa no fretboard em tempo real.",
@@ -161,7 +163,7 @@ export const projects = [
     statusBadge: "Pesquisa Concluída",
     statusColor: "amber",
     stack: ["Python", "Modelagem Matemática", "Mecânica dos Fluidos", "Sistemas Embarcados", "Simulação"],
-    image: "/projects/drone.png",
+    image: `${base}projects/drone.png`,
     github: "https://github.com/Amadeus-Moura/Simula-Voo-Drone-Bombeiro",
     confidential: false,
     summary: "Simulador computacional para drone de contenção de chamas. Algoritmos de cálculo de balística de água, pressão de bico pressurizado e navegação autônoma considerando vento e altitude.",
