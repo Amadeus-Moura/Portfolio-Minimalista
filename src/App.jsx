@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -16,6 +16,18 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isCurriculumOpen, setIsCurriculumOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  const handleCloseProject = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
+
+  const handleCloseCurriculum = useCallback(() => {
+    setIsCurriculumOpen(false);
+  }, []);
+
+  const handleCloseCommandPalette = useCallback(() => {
+    setIsCommandPaletteOpen(false);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -65,23 +77,29 @@ export default function App() {
         onOpenCurriculum={() => setIsCurriculumOpen(true)}
       />
 
-      {/* Interactive Modals */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Interactive Modals (Rendered only when active) */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={handleCloseProject}
+        />
+      )}
 
-      <CurriculumModal
-        isOpen={isCurriculumOpen}
-        onClose={() => setIsCurriculumOpen(false)}
-      />
+      {isCurriculumOpen && (
+        <CurriculumModal
+          isOpen={isCurriculumOpen}
+          onClose={handleCloseCurriculum}
+        />
+      )}
 
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onOpenCurriculum={() => setIsCurriculumOpen(true)}
-        onSelectProject={(project) => setSelectedProject(project)}
-      />
+      {isCommandPaletteOpen && (
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={handleCloseCommandPalette}
+          onOpenCurriculum={() => setIsCurriculumOpen(true)}
+          onSelectProject={(project) => setSelectedProject(project)}
+        />
+      )}
 
     </div>
   );

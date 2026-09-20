@@ -9,27 +9,28 @@ export default function CommandPalette({ isOpen, onClose, onOpenCurriculum, onSe
   const inputRef = useRef(null);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        onClose(false); // toggle handled in parent
+        onClose();
       }
       if (e.key === 'Escape') {
         onClose();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isOpen]);
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => inputRef.current?.focus(), 50);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow || '';
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
